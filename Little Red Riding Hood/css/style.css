@@ -1,0 +1,713 @@
+/**
+ *
+ * Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+/*! normalize.css v2.1.0 | MIT License | git.io/normalize */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined in IE 8/9.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; }
+
+/**
+ * Correct `inline-block` display not defined in IE 8/9.
+ */
+audio,
+canvas,
+video {
+  display: inline-block; }
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+[hidden] {
+  display: none; }
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */ }
+
+/**
+ * Remove default margin.
+ */
+body {
+  margin: 0; }
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+a:focus {
+  outline: thin dotted; }
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari 5, and Chrome.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+b,
+strong {
+  font-weight: bold; }
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+dfn {
+  font-style: italic; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Correct font family set oddly in Safari 5 and Chrome.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em; }
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+pre {
+  white-space: pre-wrap; }
+
+/**
+ * Set consistent quote types.
+ */
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */
+img {
+  border: 0; }
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+figure {
+  margin: 0; }
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/**
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+button,
+input {
+  line-height: normal; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+button,
+select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */ }
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/**
+ *
+ * Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+@-webkit-keyframes title-in {
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0em); } }
+
+@-webkit-keyframes fade-out {
+  to {
+    opacity: 0; } }
+
+@-webkit-keyframes fade-in {
+  to {
+    opacity: 1; } }
+
+@-webkit-keyframes shadow-swivel1 {
+  from {
+    -webkit-transform: rotateZ(-25deg); }
+
+  50% {
+    -webkit-transform: rotateZ(-23deg); }
+
+  to {
+    -webkit-transform: rotateZ(-25deg); } }
+
+@-webkit-keyframes alice-act-in {
+  from {
+    -webkit-transform: rotateY(-20deg); }
+
+  to {
+    opacity: 1;
+    -webkit-transform: rotateY(0); } }
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-transform: translate(0, 0); }
+
+  50% {
+    -webkit-transform: translate(3px, -12px); }
+
+  100% {
+    -webkit-transform: translate(0, 0); } }
+
+.anim-fade-out {
+  -webkit-animation: fade-out 1s ease-out;
+  -webkit-animation-fill-mode: forwards; }
+
+.anim-fade-in {
+  -webkit-animation: fade-out 1s ease-out;
+  -webkit-animation-fill-mode: forwards; }
+
+.anim-floating {
+  -webkit-transform: translateZ(0);
+  -webkit-animation: float 8s infinite ease-in-out; }
+
+/**
+ *
+ * Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+.no-shape-inside {
+  /* hide scenes, hints and navigation */
+  /* show glimpse of first scene and warning */
+  /* prevent navigation */ }
+  .no-shape-inside .wrapper div,
+  .no-shape-inside #intro .direction,
+  .no-shape-inside nav {
+    display: none; }
+  .no-shape-inside #scene1,
+  .no-shape-inside #intro .warning {
+    display: block; }
+  .no-shape-inside body .wrapper {
+    height: 100%;
+    overflow: hidden; }
+
+#intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  color: #eee;
+  text-align: center;
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+  -ms-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+  z-index: 7;
+  box-sizing: border-box;
+  width: 40rem;
+  height: 50%; }
+  #intro::before {
+    top: 0;
+    right: 0;
+    z-index: -1;
+    position: fixed;
+    background: rgba(66, 66, 66, 0.89);
+    content: ' ';
+    width: 100%;
+    height: 100%; }
+  #intro.hidden {
+    display: none; }
+  #intro.hide {
+    opacity: 0; }
+  #intro a,
+  #intro header span {
+    white-space: nowrap; }
+  #intro a {
+    color: inherit; }
+    #intro a:active {
+      color: #A70203; }
+    #intro a:hover {
+      text-decoration: none; }
+  #intro p {
+    padding: 1rem 3rem;
+    font-size: 1.3em; }
+  #intro .warning {
+    text-align: left;
+    display: none;
+    border-radius: 22px;
+    background: #fcffd5 url(../images/warning.png) left center no-repeat;
+    background-size: auto 75%;
+    background-position: -5% 5%;
+    padding: 1rem 0; }
+    #intro .warning p {
+      color: #333;
+      padding-left: 4.5rem; }
+    #intro .warning a {
+      color: #A70203; }
+      #intro .warning a:active {
+        color: black; }
+  #intro .direction {
+    width: 10rem;
+    margin: 0 auto;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 2rem 3rem 0;
+    font-weight: 100; }
+    #intro .direction .illustration {
+      float: left;
+      width: 2rem;
+      margin-right: 1rem; }
+    #intro .direction span {
+      width: 100%;
+      height: 0.6rem;
+      background: white;
+      display: block;
+      opacity: 1;
+      -webkit-animation-name: fade;
+      animation-name: fade;
+      -webkit-animation-duration: 1.6s;
+      animation-duration: 1.6s;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite; }
+      #intro .direction span + span {
+        margin-top: 0.8rem; }
+      #intro .direction span:nth-child(2) {
+        -webkit-animation-delay: 0.8s;
+        animation-delay: 0.8s; }
+      #intro .direction span:nth-child(3) {
+        -webkit-animation-delay: 1.4s;
+        animation-delay: 1.4s; }
+  #intro header {
+    padding: 3rem 3rem 1rem;
+    font-size: 2em;
+    font-weight: 700;
+    font-family: Georgia, serif; }
+    #intro header .author {
+      font-size: 0.6em; }
+  #intro footer a {
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: 12;
+    text-indent: -99em;
+    overflow: hidden; }
+  #intro footer .ultranoir-logo {
+    right: 5rem;
+    width: 3.8rem;
+    height: 4.5rem;
+    background: url(../logos/logo-ultranoir.svg) center top/contain;
+    background-repeat: no-repeat; }
+  #intro footer .adobe-logo {
+    right: 1rem;
+    width: 2.7rem;
+    height: 4.5rem;
+    background: url(../logos/logo-adobe-bottom.svg) center bottom/contain; }
+
+@-webkit-keyframes fade {
+  0% {
+    opacity: 1; }
+
+  70% {
+    opacity: 0.2; }
+
+  100% {
+    opacity: 1; } }
+
+@keyframes fade {
+  0% {
+    opacity: 1; }
+
+  70% {
+    opacity: 0.2; }
+
+  100% {
+    opacity: 1; } }
+
+@font-face {
+  font-family: 'Quicksand_Light';
+  src: url("../fonts/Quicksand_Light.otf"); }
+
+@font-face {
+  font-family: 'Quicksand_Light_Oblique';
+  src: url("../fonts/Quicksand_Light_Oblique.otf"); }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0); }
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-overflow-scrolling: none; }
+
+p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.5;
+  font-family: Georgia,serif; }
+
+p + p {
+  margin-top: 1.6em; }
+
+.debugger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: white;
+  opacity: .8;
+  z-index: 10000; }
+
+.wf-active p {
+  font-size: 1.2em; }
+
+/*
+Scroll events don't trigger on vertical scrolling if overflow-x is applied to the body.
+Wrapping all content to prevent horizontal scrolling.
+*/
+.wrapper {
+  overflow-x: hidden;
+  font-size: 100%;
+  background: black;
+  position: relative; }
+
+/* Used for cross-fade between scenes */
+#overlay {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: black;
+  opacity: 0;
+  visibility: hidden; }
+
+#timeline {
+  position: absolute;
+  top: 0;
+  z-index: 5; }
+  #timeline div {
+    position: absolute;
+    width: 100%; }
+
+nav {
+  position: fixed;
+  right: 1rem;
+  z-index: 6;
+  width: 2rem;
+  height: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+  -moz-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center; }
+  nav a {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-indent: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(252, 252, 252, 0.5);
+    box-shadow: 0 0 1px 1px red; }
+    nav a:hover {
+      background: rgba(252, 252, 252, 0.3); }
+    nav a.active {
+      background: rgba(252, 252, 252, 0.5); }
+
+#floating-text {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  text-align: center;
+  font-size: 30px;
+  line-height: 35px;
+  font-family: 'Quicksand_Light';
+  opacity: 0;
+  color: rgba(36, 36, 36, 0.89);
+  text-shadow: 2px 0 2px rgba(0, 0, 0, 0.8); }
+
+.background {
+  position: fixed;
+  top: 20;
+  left: 0; }
+
+.red {
+  color: #C21E1A; }
+
+.bold {
+  font-family: 'Quicksand_Light_Oblique';
+  font-weight: bold; }

@@ -1,0 +1,195 @@
+/**
+ *
+ * Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+@import '../third-party/normalize/normalize.scss';
+@import '_animations';
+@import '_intro';
+
+@mixin cat-shape($imagePath, $shape){
+	-webkit-shape-outside: $shape;
+	background: url($imagePath) top left no-repeat;
+	background-size: contain;
+	visibility: hidden;
+}
+
+@mixin generate-cat-head-sprite(){
+	@for $i from 0 through 11 {
+		.state.state-#{$i+1} {
+			background-image: url(../images/sprite-cat-head.png);
+			background-position: -1 * $i * 20.75em 0;
+		}
+	}
+}
+
+@font-face {
+  font-family: 'Quicksand_Light';
+  src: url('../fonts/Quicksand_Light.otf');
+}
+
+@font-face {
+  font-family: 'Quicksand_Light_Oblique';
+  src: url('../fonts/Quicksand_Light_Oblique.otf');
+}
+
+html, body{
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0);
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	-webkit-overflow-scrolling: none;
+}
+
+p{
+	margin:0;
+	font-size: 1.1em;
+	line-height: 1.5;
+	font-family: Georgia,serif;
+}
+
+p + p {
+	margin-top: 1.6em;
+}
+
+.debugger {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:20px;
+	background-color:white;
+	opacity:.8;
+	z-index:10000;
+}
+
+.wf-active p{
+	font-size: 1.2em;
+}
+
+/*
+Scroll events don't trigger on vertical scrolling if overflow-x is applied to the body.
+Wrapping all content to prevent horizontal scrolling.
+*/
+.wrapper{
+	overflow-x: hidden;
+	font-size: 100%;
+	background: black;
+	position: relative;
+}
+
+/* Used for cross-fade between scenes */
+#overlay{
+	position: fixed;
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background-color: rgba(0,0,0,1);
+	opacity: 0;
+	// visibility toggled by TweenMax.js when animating 'autoAlpha' property
+	visibility: hidden;
+}
+
+#timeline{
+	position: absolute;
+	top: 0;
+	z-index: 5;
+
+	div{
+		position: absolute;
+		width: 100%;
+	}
+}
+
+nav{
+	position: fixed;
+	right: 1rem;
+	z-index: 6;
+	width: 2rem;
+	height: 100%;
+
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: flex;
+
+	-webkit-flex-flow: column nowrap;
+	-moz-flex-flow: column nowrap;
+	flex-flow: column nowrap;
+
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	justify-content: center;
+
+	-webkit-align-items: center; 
+	-moz-align-items: center;
+	align-items: center;
+
+	a{
+		$diameter: 0.5rem;
+		box-sizing: border-box;
+		overflow: hidden;
+		// hide text content just outside the visible part
+		text-indent: $diameter;
+		margin-bottom: $diameter;
+		width: $diameter;
+		height: $diameter;
+		border-radius: $diameter;
+		border: 1px solid rgba(252, 252, 252, 0.5);
+		box-shadow: 0 0 1px 1px red;
+		
+		&:hover{
+			background: rgba(252, 252, 252, 0.3);
+		}
+
+		&.active{
+			background: rgba(252, 252, 252, 0.5);
+		}
+	}
+}
+
+#floating-text {
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:100;
+	text-align: center;
+	font-size:30px;
+	line-height:35px;
+	font-family: 'Quicksand_Light';
+	opacity:0;
+	color: rgba(36, 36, 36, 0.89);
+	text-shadow: 2px 0 2px rgba(0, 0, 0, 0.8);
+}
+
+.background {
+	position:fixed;
+	top:20;
+	left:0;
+}
+
+.red {
+	color:#C21E1A;
+}
+
+.bold {
+	font-family:'Quicksand_Light_Oblique';
+	font-weight:bold;
+}
