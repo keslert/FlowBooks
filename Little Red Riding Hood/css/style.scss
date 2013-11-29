@@ -165,11 +165,14 @@ nav{
 	}
 }
 
-#floating-text {
+img.animate, div.animate {
 	position:fixed;
 	left:0;
 	top:0;
 	z-index:100;
+}
+
+#floating-text {
 	text-align: center;
 	font-size:30px;
 	line-height:35px;

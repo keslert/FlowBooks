@@ -17,10 +17,33 @@
  */
 (function(){
 
+	var imagePool = [];
+	for(var i = 0; i < 2; i++) {
+		var img = $('<img class="pool">');
+
+		imagePool.push()
+	}
 
 	var debug = $('.debugger');
 	function log(message) {
 		debug.text(message);
+	}
+
+	function getImage(scene) {
+		if(!imagePool.length) {
+			imagePool.push('<img class="pool">')
+		}
+
+		return imagePool.unshift();
+	}
+
+	function clearImages(imgs) {
+		for(var i = 0; i < imgs.length; i++) {
+			var img = imgs[i];
+			img.attr('src', '');
+			img.removeClass();
+			img.addClass('animate');
+		}
 	}
 
 	function screenX(e) {
@@ -36,6 +59,21 @@
 				scrollLoop(x)
 			});
 		}
+	}
+
+	// Translate, Rotate, Scale
+	function TRS(x, y, deg, scale) {
+		return 'translate3d('+x+'px,'+y+'px,0) rotate('+deg+'deg) scale3d('+scale+','+scale+',1)';
+	}
+
+	// Translate, Scale
+	function TS(x, y, scale) {
+		return 'translate3d('+x+'px,'+y+'px,0) scale3d('+scale+','+scale+',1)';	
+	}
+
+	// Tranlate
+	function T(x, y) {
+		return 'translate3d('+x+'px,'+y+'px,0)';
 	}
 
 	var done = true;
@@ -57,7 +95,7 @@
 	});
 
 	$(document).keydown(function(e) {
-		if(e.which < 36 && e.which > 41)
+		if(e.which < 36 || e.which > 41)
 			return;
 		
 		e.preventDefault();
@@ -66,7 +104,7 @@
 			scrollLoop(e.which == 37 ? 0 : 500);
 		}
 	}).keyup(function(e) {
-		if(e.which < 36 && e.which > 41)
+		if(e.which < 36 || e.which > 41)
 			return;
 		e.preventDefault();
 		done = true;
@@ -324,7 +362,8 @@
 	var $scene3 = $('#scene3')
 
 	var $t1 = $('#floating-text');
-	var $i1 = $('#floating-image');
+	var $i1 = $('#floating-image1');
+	var $i2 = $('#floating-image2');
 
 	var $b1 = $('#background_1');
 	var $b2 = $('#background_2');
@@ -687,38 +726,46 @@
 		// master timeline
 		var anim = new TimelineLite()
 
-		var $red = $('#scene2 .red').attr('src', 'images/scene_3/red.png');
-		var $wolf = $('#scene2 .wolf');
+
+		var $red = $i1;
+		var $wolf = $i2;
+
+		var redScale = .35;
 
 		var anim1 = new TimelineLite();
-		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:0 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:"translate3d(350px, 0, 0) rotate(3deg)" }}))
+		anim1.add(Tween.to($red, .1, {
+			onStart: function() { 
+				$red.attr('src', 'images/scene_3/red.png');
+				$red.addClass('scene2 red').css({ opacity:0, transform:TRS(Math.round(.14*wH), Math.round(.14*wH), 0, redScale)});
+				$wolf.attr('src', 'images/scene_3/wolf1.png');
+				$wolf.addClass('wolf').css({ opacity:0 });
+			}, 
+			onReverseComplete: function(){
+				clearImages([$red, $wolf]);
+			},
+		}));
+		console.log(TRS(3, 13, 0, redScale))
+		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(Math.round(.14*wH), Math.round(.14*wH), 0, redScale) }}))
 		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
 		
 
 		// anim1.add(Tween.to($wolf1, 1, {delay:-2.0, css:{ autoAlpha:1 }}))
 
 		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:0 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:"translate3d(700px, 0, 0) rotate(-3deg)" }}))
+		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(10, 13, 0, redScale) }}))
 		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
 		// anim1.add(Tween.to($wolf1, .5, {delay:-2.0, css:{ autoAlpha:0 }}))
 		// anim1.add(Tween.to($wolf2, 2, {delay:-1.5, css:{ autoAlpha:1 }}))
 
 		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:0 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:"translateX(1050px) rotate(3deg)" }}))
+		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(20, 13, 0, redScale) }}))
 		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
 		// anim1.add(Tween.to($wolf2, 1, {delay:-1.25, css:{ autoAlpha:0 }}))
 
 		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:0 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:"translateX(1300px) rotate(0deg)" }}))
+		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(30, 13, 0, redScale)}}))
 		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
 		// anim1.add(Tween.to($wolf3, 1, {delay:-1, css:{ autoAlpha:1 }}))
-
-		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:1 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:"translateX(1300px) rotate(0deg)" }}))
-		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
-
-
 
 		anim.add(anim1);
 
