@@ -75,8 +75,9 @@ p + p {
 	left:0;
 	width:100%;
 	height:20px;
+	color:white;
 	background-color:white;
-	opacity:.8;
+	opacity:.5;
 	z-index:10000;
 }
 
@@ -170,6 +171,19 @@ img.animate, div.animate {
 	left:0;
 	top:0;
 	z-index:100;
+	opacity:0;
+	-webkit-transition:all 0s;
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-perspective:1000;
+	perspective:1000;
+}
+
+#floating-image1 {
+	z-index:101;
 }
 
 #floating-text {
@@ -195,4 +209,8 @@ img.animate, div.animate {
 .bold {
 	font-family:'Quicksand_Light_Oblique';
 	font-weight:bold;
+}
+
+#scene2 {
+	position:fixed;
 }

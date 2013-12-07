@@ -63,7 +63,7 @@
 
 	// Translate, Rotate, Scale
 	function TRS(x, y, deg, scale) {
-		return 'translate3d('+x+'px,'+y+'px,0) rotate('+deg+'deg) scale3d('+scale+','+scale+',1)';
+		return 'translate3d('+x+'px,'+y+'px,0px) rotate('+deg+'deg) scale3d('+scale+','+scale+',1)';
 	}
 
 	// Translate, Scale
@@ -76,11 +76,16 @@
 		return 'translate3d('+x+'px,'+y+'px,0)';
 	}
 
+	var isTouch = navigator.userAgent.match(/iPhone|iPad|iPod/i);
 	var done = true;
-	var scrollAmount = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 8 : 20;
+	var scrollAmount = isTouch ? 10 : 20;
 	var scrollListener = null;
 	$(document).on("touchstart", function(e) {
 		e.preventDefault();
+
+		if(isTouch && e.originalEvent.touches && e.originalEvent.touches.length > 2) {
+			location.reload();
+		}
 		var x = screenX(e);
 
 		if(done) {
@@ -364,6 +369,8 @@
 	var $t1 = $('#floating-text');
 	var $i1 = $('#floating-image1');
 	var $i2 = $('#floating-image2');
+	var $i3 = $('#floating-image3');
+	var $i4 = $('#floating-image4');
 
 	var $b1 = $('#background_1');
 	var $b2 = $('#background_2');
@@ -540,6 +547,10 @@
 			onComplete: function(){
 				$b1.attr('src', backgrounds[1].image);
 				$b1.css(backgrounds[1].css);
+				$i1.attr('src', 'images/scene_3/red.png');
+				$i2.attr('src', 'images/scene_3/wolf1.png');
+				$i3.attr('src', 'images/scene_3/wolf2.png');
+				$i4.attr('src', 'images/scene_3/wolf3.png');
 			}
 		})
 
@@ -547,22 +558,21 @@
 	}
 
 	function scene1_narrationAnimation() {
-		$t1.css({
-			width:'35vw',
-			left:'30vw',
-			top:'10vw'
-		})
 		// master timeline
-		var anim = new TimelineLite()
+		var anim = new TimelineLite();
 
 		// part 1
 		var text1 = 'Once upon a time there was a dear little girl who was loved by everyone who looked at her';
 		var anim1 = new TimelineLite();
-		anim1.add(Tween.to($t1, 0, { 
-			css:{ opacity:0, transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.text(text1) },
+		anim1.add(Tween.to($t1, .1, { 
+			delay: .1,
+			css:{ opacity:0 },
+			onStart: function() { 
+				$t1.text(text1).css({ width:'35vw', transform:T(400, 20) });
+				console.log('yammo 1');
+			}
 		}))
-		anim1.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
+		anim1.add(Tween.to($t1, 1, { css:{ opacity:1, transform:T(400, 50) }, ease:Power1.easeInOut}))
 		anim1.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.text(text1) }} }))
 		anim.add(anim1);
 
@@ -570,10 +580,13 @@
 		var text2 = 'But most of all by her grandmother, and there was nothing that she would not have given to the child.';
 		anim2.add(Tween.to($t1, .1, { 
 			delay: .1,
-			css:{ transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.text(text2) }
+			css:{ transform:T(400, 20) },
+			onStart: function() { 
+				$t1.text(text2) 
+				console.log('yammo 2');
+			}
 		}))
-		anim2.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
+		anim2.add(Tween.to($t1, 1, { css:{ opacity:1, transform:T(400, 50) }, ease:Power1.easeInOut}))
 		anim2.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.text(text2) }} }))
 		anim.add(anim2);
 
@@ -581,10 +594,13 @@
 		var text3 = 'Once she gave her a little riding hood of red velvet, which suited her so well that she would never wear anything else;';
 		anim3.add(Tween.to($t1, .1, { 
 			delay: .1,
-			css:{ transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.text(text3) }
+			css:{ transform:T(400, 20) },
+			onStart: function() { 
+				$t1.text(text3);
+				console.log('yammo 3');
+			}
 		}))
-		anim3.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
+		anim3.add(Tween.to($t1, 1, { css:{ opacity:1, transform:T(400, 50) }, ease:Power1.easeInOut}))
 		anim3.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.text(text3) }} }))
 		anim.add(anim3);
 
@@ -592,11 +608,14 @@
 		var text4 = 'so she was always called <span class="red bold">Little Red Riding Hood.</span>';
 		anim4.add(Tween.to($t1, .1, { 
 			delay: .1,
-			css:{ transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.html(text4) }
+			css:{ transform:T(400, 20) },
+			onStart: function() { 
+				$t1.html(text4);
+				console.log('yammo 4');
+			}
 		}))
-		anim4.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
-		anim4.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.html(text4) }} }))
+		anim4.add(Tween.to($t1, 1, { css:{ opacity:1, transform:T(400, 50) }, ease:Power1.easeInOut}))
+		anim4.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.html(text4).css({ width:'35vw' }) }} }))
 		anim.add(anim4);
 
 		return anim;
@@ -610,11 +629,6 @@
 			height: wH * 5
 		}
 
-		var backgroundKeyframe = {
-			top:height,
-			height: narrationKeyframe.height
-		}
-
 		var $spacer = $('<div>')
 			.attr('class', 'pin-spacer')
 			.css({
@@ -622,14 +636,12 @@
 			})
 			.insertAfter($scene2)
 
-		var narrationAnimation = scene2_narrationAnimation();
-
 		var scrollAnimation = new TimelineLite();
-		scrollAnimation.add(Tween.to($scene2, 1,
+		scrollAnimation.add(Tween.to($b1, 1,
 			{
-				css: { transform:'translate3d(-800px, 0, 0)'},
+				css: { transform:T(-800, 0)},
 				ease: Linear.easeNone,
-				immediateRender: false
+				immediateRender: false,
 			}
 		))
 
@@ -642,10 +654,10 @@
 			top: height + pause,
 			height: narrationKeyframe.height
 		}
-		var redAnimation = scene2_redAnimation();
 
-		Timeline.add(redKeyframe, redAnimation);
-		// Timeline.add(narrationKeyframe, narrationAnimation);
+		Timeline.add(redKeyframe, scene2_narrationAnimation());
+		Timeline.add(redKeyframe, scene2_redAnimation());
+
 		Timeline.add(scrollKeyframe, scrollAnimation);
 
 		// setup crossfade to next scene when the bottom of $scene1 is reached
@@ -669,54 +681,34 @@
 	}
 
 	function scene2_narrationAnimation() {
-		$t1.css({
-			width:'35vw',
-			left:'30vw',
-			top:'10vw'
-		})
 		// master timeline
 		var anim = new TimelineLite()
 
-		// part 1
+
+		function animate(text, i) {
+			var anim1 = new TimelineLite();
+			anim1.add(Tween.to($t1, .1, {
+				delay: (i == 0 || i == 3) ? 1 : 0,
+				css:{ opacity:0, transform:T(-400, 200) },
+				onStart: function() {
+					console.log(text);
+					$t1.text(text).css({ width:'80vw' })
+				},
+			}))
+			anim1.add(Tween.to($t1, 1, { css:{ opacity:1, transform:T(100, 200) }, ease:Power1.easeInOut}))
+			anim1.add(Tween.to($t1, 1, { css:{ transform:T(150, 200) }}))
+			anim1.add(Tween.to($t1, 1, { css:{ opacity:0, transform:T(600, 200) }, data: { onReverseStart: function() { $t1.text(text) }} }))
+			anim.add(anim1);
+		}
+
 		var text1 = 'The grandmother lived out in the wood';
-		var anim1 = new TimelineLite();
-		anim1.add(Tween.to($t1, 0, { 
-			css:{ opacity:0, transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.text(text1) },
-		}))
-		anim1.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
-		anim1.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.text(text1) }} }))
-		anim.add(anim1);
-
 		var text2 = 'half a league from the village';
-		var anim2 = new TimelineLite();
-		anim2.add(Tween.to($t1, 0, { 
-			css:{ opacity:0, transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.text(text2) },
-		}))
-		anim2.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
-		anim2.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.text(text2) }} }))
-		anim.add(anim2);
-
 		var text3 = 'and just as Little Red Riding Hood entered the wood,';
-		var anim3 = new TimelineLite();
-		anim3.add(Tween.to($t1, 0, { 
-			css:{ opacity:0, transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.text(text3) },
-		}))
-		anim3.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
-		anim3.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.text(text3) }} }))
-		anim.add(anim3);
-
 		var text4 = 'a Wolf met her.';
-		var anim4 = new TimelineLite();
-		anim4.add(Tween.to($t1, 0, { 
-			css:{ opacity:0, transform:'translate3d(30px, 20px, 0)' },
-			onStart: function() { $t1.text(text4) },
-		}))
-		anim4.add(Tween.to($t1, 1, { css:{ opacity:1, transform:'translate3d(30px, 50px, 0)' }, ease:Power1.easeInOut}))
-		anim4.add(Tween.to($t1, 1, { css:{ opacity:0}, data: { onReverseStart: function() { $t1.text(text4) }} }))
-		anim.add(anim4);
+		var text = [text1, text2, text3, text4];
+		for(var i = 0; i < text.length; i++) {
+			animate(text[i], i);
+		}
 
 		return anim;
 	}
@@ -728,43 +720,51 @@
 
 
 		var $red = $i1;
-		var $wolf = $i2;
+		var $wolf1 = $i2;
+		var $wolf2 = $i3;
+		var $wolf3 = $i4;
 
 		var redScale = .35;
 
 		var anim1 = new TimelineLite();
 		anim1.add(Tween.to($red, .1, {
 			onStart: function() { 
-				$red.attr('src', 'images/scene_3/red.png');
-				$red.addClass('scene2 red').css({ opacity:0, transform:TRS(Math.round(.14*wH), Math.round(.14*wH), 0, redScale)});
-				$wolf.attr('src', 'images/scene_3/wolf1.png');
-				$wolf.addClass('wolf').css({ opacity:0 });
+				console.log('RED 1');
+				$red.addClass('scene2 red').css({ opacity:0, transform:TRS(0, 13, 0, redScale)});
 			}, 
 			onReverseComplete: function(){
-				clearImages([$red, $wolf]);
+				console.log('RED 2');
+				clearImages([$red, $wolf1, $wolf2, $wolf3]);
 			},
 		}));
-		console.log(TRS(3, 13, 0, redScale))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(Math.round(.14*wH), Math.round(.14*wH), 0, redScale) }}))
-		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
-		
+		anim1.add(Tween.to($red, .1, {ease: Linear.easeNone, css:{ transform:TRS(-10, 13, 0, redScale) }}))
+			anim1.add(Tween.to($wolf1, .1, {delay:-.1, ease: Linear.easeNone, css:{ transform:TRS(110, 130, 0, .3) } }));
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ autoAlpha:1, transform:TRS(-80, 13, 0, redScale)}}))
+			anim1.add(Tween.to($wolf1, 1, {delay:-1, ease: Linear.easeNone, css:{ transform:TRS(30, 130, 0, .3), opacity:1 } }));
 
-		// anim1.add(Tween.to($wolf1, 1, {delay:-2.0, css:{ autoAlpha:1 }}))
 
-		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:0 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(10, 13, 0, redScale) }}))
-		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
-		// anim1.add(Tween.to($wolf1, .5, {delay:-2.0, css:{ autoAlpha:0 }}))
-		// anim1.add(Tween.to($wolf2, 2, {delay:-1.5, css:{ autoAlpha:1 }}))
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-150, 13, 0, redScale) }}))
+		anim1.add(Tween.to($wolf1, 1, {delay:-1, ease: Linear.easeNone, css:{ transform:TRS(-50, 130, 0, .3), opacity:0 } }));
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-220, 13, 0, redScale), autoAlpha:0 }}))
+		anim1.add(Tween.to($red, .1, {ease: Linear.easeNone, css:{ transform:TRS(10, 13, 0, redScale) }}))
+			anim1.add(Tween.to($wolf2, .1, {delay:-.1, ease: Linear.easeNone, css:{ transform:TRS(210, 220, 0, .3) }}));
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-60, 13, 0, redScale), autoAlpha:1 }}))
 
-		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:0 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(20, 13, 0, redScale) }}))
-		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
-		// anim1.add(Tween.to($wolf2, 1, {delay:-1.25, css:{ autoAlpha:0 }}))
+	
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-130, 13, 0, redScale) }}))
+			anim1.add(Tween.to($wolf2, 1, {delay:-1, ease: Linear.easeNone, css:{ transform:TRS(130, 220, 0, .3), opacity:1 } }));
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-200, 13, 0, redScale), autoAlpha:0 }}))
+			anim1.add(Tween.to($wolf2, 1, {delay:-1, ease: Linear.easeNone, css:{ transform:TRS(50, 220, 0, .3), opacity:0 } }));
+		anim1.add(Tween.to($red, .1, {ease: Linear.easeNone, css:{ transform:TRS(20, 13, 0, redScale) }}))
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-50, 13, 0, redScale), autoAlpha:1 }}))
 
-		anim1.add(Tween.to($red, 1, {delay: 1, css:{ autoAlpha:0 }}))
-		anim1.add(Tween.to($red, .1, {delay: 0, css:{ transform:TRS(30, 13, 0, redScale)}}))
-		anim1.add(Tween.to($red, 1, {delay: 0, css:{ autoAlpha:1 }}))
+
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-120, 13, 0, redScale) }}))
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-190, 13, 0, redScale), autoAlpha:0 }}))
+		anim1.add(Tween.to($red, .1, {ease: Linear.easeNone, css:{ transform:TRS(30, 13, 0, redScale)}}))
+			anim1.add(Tween.to($wolf3, .1, {delay:-.1, ease: Linear.easeNone, css:{ transform:TRS(310, 80, 0, .6) }}));
+		anim1.add(Tween.to($red, 1, {ease: Linear.easeNone, css:{ transform:TRS(-40, 13, 0, redScale), autoAlpha:1 }}))
+			anim1.add(Tween.to($wolf3, 1, {delay:-1, ease: Linear.easeNone, css:{ transform:TRS(230, 80, 0, .6), opacity:1 } }));
 		// anim1.add(Tween.to($wolf3, 1, {delay:-1, css:{ autoAlpha:1 }}))
 
 		anim.add(anim1);
