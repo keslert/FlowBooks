@@ -366,7 +366,8 @@
 	var $scene2 = $('#scene2')
 	var $scene3 = $('#scene3')
 
-	var $t1 = $('#floating-text');
+	var $t1 = $('#floating-text1');
+	var $t2 = $('#floating-text2');
 	var $i1 = $('#floating-image1');
 	var $i2 = $('#floating-image2');
 	var $i3 = $('#floating-image3');
@@ -661,23 +662,23 @@
 		Timeline.add(scrollKeyframe, scrollAnimation);
 
 		// setup crossfade to next scene when the bottom of $scene1 is reached
-		crossfade({
-			from: $scene2,
-			to: $scene3,
-			duration: window.innerHeight,
-			keyframe: {
-				navigable: true,
-				top: narrationKeyframe.top + narrationKeyframe.height + wH,
-				height: window.innerHeight
-			},
-			onReverseComplete: function() {
+		// crossfade({
+		// 	from: $scene2,
+		// 	to: $scene3,
+		// 	duration: window.innerHeight,
+		// 	keyframe: {
+		// 		navigable: true,
+		// 		top: narrationKeyframe.top + narrationKeyframe.height + wH,
+		// 		height: window.innerHeight
+		// 	},
+		// 	onReverseComplete: function() {
 
-			},
-			onComplete: function(){
+		// 	},
+		// 	onComplete: function(){
 				
-			}
-		})
-		height += narrationKeyframe.height + wH;
+		// 	}
+		// })
+		height += narrationKeyframe.height;// + wH;
 	}
 
 	function scene2_narrationAnimation() {
@@ -772,6 +773,66 @@
 		return anim;
 	}
 
+	function setupScene3() {
+
+		var narrationKeyframe = {
+			top: height,
+			height: wH * 5
+		}
+
+		var $spacer = $('<div>')
+			.attr('class', 'pin-spacer')
+			.css({
+				height: narrationKeyframe.height
+			})
+			.insertAfter($scene3)
+
+
+		var wText = [
+			"Good day, Little Red Riding Hood,",
+			"Whither away so early, Little Red Riding Hood?",
+			"What have you got in your apron?",
+			"Where does your grandmother live, Little Red Riding Hood?"
+		];
+		var rText = [
+	 		"Thank you kindly, wolf.",
+			"To my grandmother's.",
+	 		"Cake and wine; yesterday was baking-day, so poor sick grandmother is to have something good, to make her stronger.",
+	 		"A good quarter of a league farther on in the wood; her house stands under the three large oak-trees, the nut-trees are just below; you surely must know it,"
+	 	];
+
+	 	var animation = new TimelineLite();
+	 	function animate(wolf, red, i) {
+			var anim1 = new TimelineLite();
+			anim1.add(Tween.to($t1, .1, { css:{ opacity:0, transform:T(300, 200) }, onStart: function() {
+					console.log(red);
+					if(i == 0) { $t1.addClass('red').css({ width: '20vw'}); }
+					$t1.text(rText[i]);
+			}}))
+			anim1.add(Tween.to($t1, .1, { delay:-.1, css:{ opacity:0, transform:T(350, 100) }, onStart: function() {
+					console.log(wolf);
+					if(i == 0) { $t2.addClass('wolf').css({ width: '20vw'}); }
+					$t2.text(wText[i]);
+			}}))
+
+			anim1.add(Tween.to($t2, 1, { css:{ opacity:1, transform:T(350, 100) }, ease:Power1.easeInOut}))
+			anim1.add(Tween.to($t2, 1, { css:{ opacity:0, transform:T(350, 100) }, ease:Power1.easeInOut}))
+
+			anim1.add(Tween.to($t1, 1, { css:{ opacity:1, transform:T(300, 200) }, ease:Power1.easeInOut}))
+			anim1.add(Tween.to($t1, 1, { css:{ opacity:0, transform:T(300, 200) }, ease:Power1.easeInOut}))
+
+			animation.add(anim1);
+		}
+
+		for(var i = 0; i < wText.length; i++) {
+			animate(wText[i], rText[i], i);
+		}
+
+		Timeline.add(narrationKeyframe, animation);
+
+		height += narrationKeyframe.height;
+	}
+
 	function trans(options){
 		var $overlay = $('#overlay')
 		var noop = function(){}
@@ -850,11 +911,9 @@
 	}
 
 	function setup(){
-		// scene 1
 		setupScene1();
-
-		// scene 2
 		setupScene2();
+		setupScene3();
 
 		// 'Luke, use the hammer'
 		Timeline.emALLTheThings()

@@ -697,8 +697,6 @@ img.animate, div.animate {
   -webkit-transition: all 0s;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-perspective: 1000;
   perspective: 1000; }
@@ -706,7 +704,7 @@ img.animate, div.animate {
 #floating-image1 {
   z-index: 101; }
 
-#floating-text {
+#floating-text1, #floating-text2 {
   text-align: center;
   font-size: 30px;
   line-height: 35px;
@@ -714,14 +712,20 @@ img.animate, div.animate {
   opacity: 0;
   color: rgba(36, 36, 36, 0.89);
   text-shadow: 2px 0 2px rgba(0, 0, 0, 0.8); }
+  #floating-text1.wolf, #floating-text2.wolf {
+    color: rgba(0, 0, 0, 0.95);
+    font-size: 35px; }
+  #floating-text1.red, #floating-text2.red {
+    color: #C21E1A; }
 
 .background {
   position: fixed;
   top: 20;
-  left: 0; }
-
-.red {
-  color: #C21E1A; }
+  left: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000; }
 
 .bold {
   font-family: 'Quicksand_Light_Oblique';
